@@ -1,0 +1,7 @@
+{
+  "extends" : "@repo/typsecript-config/base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist"
+  }
+}
