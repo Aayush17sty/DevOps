@@ -2,18 +2,20 @@
   "name": "@repo/db",
   "version": "1.0.0",
   "description": "",
-  "exports" : {
-    "./client" : "./prisma/src/index.ts"
+  "exports": {
+    "./client": "./prisma/src/index.ts",
+    "./generated/client": "./prisma/src/generated/client"
   },
   "main": "index.js",
   "keywords": [],
   "author": "",
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
+    "@types/pg": "^8.20.0",
     "prisma": "^7.8.0"
   },
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
