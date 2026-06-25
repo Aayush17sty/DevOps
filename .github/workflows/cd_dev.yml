@@ -9,13 +9,22 @@ jobs:
     runs-on: ubuntu-latest
     name: re-Deploying whole app to development environment
     steps: 
-    - run: | 
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
-        chmod 400 /home/runner/ssh_key
-        ssh -oStrictHostKeyChecking=no -i ~/ssh_key root@64.227.162.230
-        cd DevOps && git pull
-        pnpm install
-        pnpm run build
-        pm2 restart fe-server
-        pm2 restart ws-server
-        pm2 restart http-server
+    uses: pnpm/action-setup@v3
+    with:
+      version: 9
+
+    uses: actions/setup-node@v4
+    with:
+      node-version: 20
+      cache: 'pnpm'
+    
+    run: | 
+      echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
+      chmod 400 /home/runner/ssh_key
+      ssh -oStrictHostKeyChecking=no -i ~/ssh_key root@64.227.162.230
+      cd /root/DevOps && git pull
+      pnpm install
+      pnpm run build
+      pm2 restart fe-server
+      pm2 restart ws-server
+      pm2 restart http-server
