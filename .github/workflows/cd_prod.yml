@@ -11,7 +11,7 @@ jobs:
     steps: 
     - run: | 
         echo {{ secrets.SSH_PRIVATE_KEY }} &> ~/ssh_key
-        ssh -i ~/ssh_key root@167.99.225.32
+        ssh -oStrictHostKeyChecking=no -i ~/ssh_key root@167.99.225.32
         cd DevOps && git pull
         pnpm install
         pnpm run build
