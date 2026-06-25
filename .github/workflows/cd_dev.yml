@@ -5,14 +5,14 @@ on:
       
 
 jobs:
-install:
+  install:
     runs-on: ubuntu-latest
 
     steps:
       - uses: pnpm/action-setup@v6
         with:
           version: 10
-redeploying:
+  redeploying:
     runs-on: ubuntu-latest
     name: re-Deploying whole app to development environment
     steps: 
