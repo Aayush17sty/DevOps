@@ -1,8 +1,8 @@
 name: Deploy on prod server
 on:
   push:
-    branches:
-      - "production"
+    branches: [ production ]
+      
 
 jobs:
   redeploying:
