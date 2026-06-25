@@ -1,0 +1,21 @@
+name: Deploy on dev server
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  redeploying:
+    name: re-Deploying whole app to development environment
+    
+    steps: 
+      -name: SSH Into Server
+      -run: | 
+        echo {{ secrets.SSH_PRIVATE_KEY }} &> ~/ssh_key
+        ssh -i ~/ssh_key root@64.227.162.230
+        cd DevOps && git pull
+        pnpm install
+        pnpm run build
+        pm2 restart fe-server
+        pm2 restart ws-server
+        pm2 restart http-server

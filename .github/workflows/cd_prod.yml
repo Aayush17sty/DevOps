@@ -1,0 +1,21 @@
+name: Deploy on prod server
+on:
+  push:
+    branches:
+      - "production"
+
+jobs:
+  redeploying:
+    name: re-Deploying whole app to production environment
+    
+    steps: 
+      -name: SSH Into Server
+      -run: | 
+        echo {{ secrets.SSH_PRIVATE_KEY }} &> ~/ssh_key
+        ssh -i ~/ssh_key root@167.99.225.32
+        cd DevOps && git pull
+        pnpm install
+        pnpm run build
+        pm2 restart fe-server
+        pm2 restart ws-server
+        pm2 restart http-server
