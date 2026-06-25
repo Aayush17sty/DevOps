@@ -6,11 +6,12 @@ on:
 
 jobs:
   redeploying:
+    runs-on: ubuntu-latest
     name: re-Deploying whole app to development environment
     
     steps: 
-      -name: SSH Into Server
-      -run: | 
+      name: SSH Into Server
+      run: | 
         echo {{ secrets.SSH_PRIVATE_KEY }} &> ~/ssh_key
         ssh -i ~/ssh_key root@64.227.162.230
         cd DevOps && git pull
